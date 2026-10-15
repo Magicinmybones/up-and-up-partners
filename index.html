@@ -5,6 +5,26 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#000000">
 <title>UP&amp;UP Partners</title>
+<script>
+/* Opt in before the page is painted; without JavaScript, the page stays visible. */
+(() => {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  document.documentElement.classList.add('is-entering');
+  let fallback;
+  const finish = () => {
+    document.documentElement.classList.remove('is-entering');
+    document.removeEventListener('animationend', onAnimationEnd);
+    window.clearTimeout(fallback);
+  };
+  const onAnimationEnd = (event) => {
+    if (event.animationName === 'upup-meta-enter' && event.target.classList.contains('meta')) finish();
+  };
+  document.addEventListener('animationend', onAnimationEnd);
+  document.addEventListener('DOMContentLoaded', () => {
+    fallback = window.setTimeout(finish, 2600);
+  }, {once: true});
+})();
+</script>
 <style>
 /* ------------------------------------------------------------------
    Fonts — Inter Display / Inter (OFL), subset + embedded for offline
@@ -191,6 +211,48 @@ a{color:inherit;text-decoration:none}
 @media (min-aspect-ratio: 1/1) and (max-height: 430px){
   .cards{flex-direction:row;width:calc(147.1 * 2 * var(--u))}
   .card:nth-child(1),.card:nth-child(2){height:calc(89.4 * var(--u));margin-top:calc(5.0 * var(--u))}
+}
+
+/* One opening composition: title, contact cards, navigation, then the action. */
+@media (prefers-reduced-motion: no-preference){
+  html.is-entering .wordmark{
+    animation:upup-title-enter 1.14s cubic-bezier(.19,1,.22,1) .14s both;
+  }
+  html.is-entering .card{
+    animation:upup-card-enter .72s cubic-bezier(.22,1,.36,1) both;
+  }
+  html.is-entering .card:first-child{animation-delay:.48s}
+  html.is-entering .card:nth-child(2){animation-delay:.64s}
+  html.is-entering .nav li{
+    animation:upup-nav-enter .56s cubic-bezier(.22,1,.36,1)
+      calc(.6s + var(--i) * .065s) both;
+  }
+  html.is-entering .join{
+    animation:upup-join-enter .62s cubic-bezier(.22,1,.36,1) 1.12s both;
+  }
+  html.is-entering .meta{
+    animation:upup-meta-enter .55s cubic-bezier(.22,1,.36,1) 1.27s both;
+  }
+}
+@keyframes upup-title-enter{
+  from{clip-path:inset(0 0 100% 0)}
+  to{clip-path:inset(0 0 0 0)}
+}
+@keyframes upup-card-enter{
+  from{clip-path:inset(0 0 100% 0);opacity:0}
+  to{clip-path:inset(0 0 0 0);opacity:1}
+}
+@keyframes upup-nav-enter{
+  from{opacity:0;transform:translateY(-6px)}
+  to{opacity:1;transform:translateY(0)}
+}
+@keyframes upup-join-enter{
+  from{opacity:0;transform:translateY(8px)}
+  to{opacity:1;transform:translateY(0)}
+}
+@keyframes upup-meta-enter{
+  from{opacity:0}
+  to{opacity:1}
 }
 @media (prefers-reduced-motion: reduce){*{transition:none!important}}
 </style>
