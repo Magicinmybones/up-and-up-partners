@@ -1,0 +1,25 @@
+# Local tools and editor settings
+node_modules/
+.wrangler/
+.vscode/
+.idea/
+
+# Secrets and machine-local settings
+.env
+.env.*
+!.env.example
+
+# Build and test output
+dist/
+build/
+coverage/
+*.log
+*.tmp
+*.bak
+*.orig
+*.map
+
+# Operating system files
+.DS_Store
+Thumbs.db
+desktop.ini

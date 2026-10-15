@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#000000">
+<title>UP&amp;UP Partners</title>
+<style>
+/* ------------------------------------------------------------------
+   Fonts — Inter Display / Inter (OFL), subset + embedded for offline
+------------------------------------------------------------------- */
+@font-face{font-family:"UPI";src:url(assets/upi.woff2) format("woff2-variations"),url(assets/upi.woff2) format("woff2");font-weight:100 900;font-style:normal;font-display:block}
+
+/* ------------------------------------------------------------------
+   Design tokens (all values measured on the 1178 × 632 reference)
+------------------------------------------------------------------- */
+:root{
+  --ref-w:1178; --ref-h:632;
+  --ink:#ece6f4;            /* light UI text           */
+  --ink-card:#f7f5f6;       /* glass card text         */
+  --ink-dim:#585363;        /* ©2025                   */
+  --ink-mute:#52436e;       /* ALL RIGHTS RESERVED     */
+  --ink-dark:#1c1b1d;       /* text on white button    */
+  --title-edge:#704fa5;     /* title gradient ends     */
+  --title-mid:#d1c2e3;      /* title gradient centre   */
+  --title-q:#a08bc1;        /* title gradient quarters */
+  --logo:#5019c5;
+  --glass-tint:rgba(232,211,255,.112);
+  --bg:#000;
+}
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0;padding:0;height:100%;background:var(--bg)}
+body{
+  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+  text-rendering:geometricPrecision;
+  font-family:"UPI","Inter",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  font-weight:600;font-optical-sizing:auto;color:var(--ink);overflow-x:hidden;
+}
+a{color:inherit;text-decoration:none}
+
+/* ------------------------------------------------------------------
+   Stage.  One unit (--u) = 1 reference pixel.  The stage always fills
+   the viewport exactly (no letterboxing, no blank bands); UI is anchored
+   to the edges and scales with the limiting viewport dimension.
+------------------------------------------------------------------- */
+.hero{
+  position:relative;isolation:isolate;overflow:hidden;
+  width:100%;height:100vh;height:100dvh;min-height:calc(360 * var(--u));
+  container-type:size;
+  --u:max(.8px,min(calc(100vw / 1178),calc(100vh / 632)));
+  --t:min(calc(100vw / 1178),calc(100vh / 632 * 1.32));
+}
+@supports (height:100dvh){
+  .hero{--u:max(.8px,min(calc(100vw / 1178),calc(100dvh / 632)));
+        --t:min(calc(100vw / 1178),calc(100dvh / 632 * 1.32));}
+}
+
+/* Scene = background + logo, locked together, "cover"-fitted. */
+.scene{
+  position:absolute;left:50%;top:50%;z-index:0;
+  width:max(100vw,calc(100vh * 1178 / 632));
+  width:max(100cqw,calc(100cqh * 1178 / 632));
+  aspect-ratio:1178 / 632;
+  transform:translate(-50%,-50%);
+  pointer-events:none;
+}
+.scene img{
+  position:absolute;display:block;
+  left:-0.0789%;top:0.0032%;width:100.102%;height:100.2215%;
+  max-width:none;user-select:none;
+}
+.scene svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+
+/* ------------------------------------------------------------------
+   Glass cards
+------------------------------------------------------------------- */
+.cards{position:absolute;z-index:2;left:calc(24.3 * var(--u));top:calc(31.9 * var(--u));
+  width:calc(147.1 * var(--u));display:flex;flex-direction:column}
+.card{
+  position:relative;display:block;width:100%;
+  background:var(--glass-tint);
+  -webkit-backdrop-filter:blur(calc(14 * var(--u))) saturate(0.829) brightness(1.082);
+  backdrop-filter:blur(calc(14 * var(--u))) saturate(0.829) brightness(1.082);
+  color:var(--ink-card);
+  transition:background-color .25s ease;
+}
+.card:nth-child(1){height:calc(89.1 * var(--u))}
+.card:nth-child(2){height:calc(89.4 * var(--u));margin-top:calc(5.0 * var(--u))}
+.card:hover,.card:focus-visible{background:rgba(227,205,255,.16);outline:none}
+.card .ic{
+  position:absolute;left:calc(13.2 * var(--u));top:calc(11.5 * var(--u));
+  width:calc(15 * var(--u));height:calc(15 * var(--u));
+  background:#fff;display:block;
+}
+.card:nth-child(2) .ic{top:calc(11.8 * var(--u))}
+.card .ic svg{position:absolute;inset:0;width:100%;height:100%}
+.card .lbl{
+  position:absolute;left:calc(13.0 * var(--u));top:calc(52.045 * var(--u));
+  font-size:calc(12 * var(--u));line-height:1;
+  letter-spacing:-0.0133em;white-space:nowrap;font-weight:600;
+}
+.card .lbl span{display:block}
+.card .lbl span + span{position:absolute;left:0;top:calc(12.78 * var(--u))}
+
+/* ------------------------------------------------------------------
+   Navigation (top right)
+------------------------------------------------------------------- */
+.nav{position:absolute;z-index:2;right:calc(22.92 * var(--u));top:calc(32.525 * var(--u));
+  margin:0;padding:0;list-style:none;text-align:right;height:calc((16.35 * 4 + 12) * var(--u))}
+.nav li{position:absolute;right:0;top:calc(var(--i) * 16.35 * var(--u) + var(--d,0) * var(--u))}
+.nav li:nth-child(1){--i:0;--d:-0.21} .nav li:nth-child(2){--i:1;--d:-0.29} .nav li:nth-child(3){--i:2;--d:0}
+.nav li:nth-child(4){--i:3;--d:-0.2} .nav li:nth-child(5){--i:4;--d:-0.31}
+.nav a{display:block;font-size:calc(12 * var(--u));line-height:1;
+  letter-spacing:-0.055em;white-space:nowrap;color:var(--ink);transition:opacity .2s}
+.nav a:hover,.nav a:focus-visible{opacity:.7;outline:none}
+
+.join{
+  position:absolute;z-index:2;right:calc(22.94 * var(--u));top:calc(166.52 * var(--u));
+  width:calc(104.3 * var(--u));height:calc(31.55 * var(--u));
+  background:#fff;color:var(--ink-dark);display:block;
+}
+.join .sq{
+  position:absolute;left:calc(2.59 * var(--u));top:calc(2.65 * var(--u));
+  width:calc(26.31 * var(--u));height:calc(26.31 * var(--u));
+  background:linear-gradient(84deg,#2a2230,#191619);
+  box-shadow:inset 0 calc(1.4 * var(--u)) calc(2.4 * var(--u)) rgba(0,0,0,.42),inset 0 calc(-1 * var(--u)) calc(2 * var(--u)) rgba(0,0,0,.18);
+  transition:background .25s;
+}
+.join .sq svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.join .tx{position:absolute;left:calc(42.38 * var(--u));top:calc(11.3 * var(--u));
+  font-size:calc(11.2 * var(--u));line-height:1;letter-spacing:-0.029em;white-space:nowrap;font-weight:600}
+.join:hover .sq,.join:focus-visible .sq{background:var(--logo)}
+.join:focus-visible{outline:none}
+
+/* ------------------------------------------------------------------
+   Bottom block: meta row + wordmark, anchored to the bottom edge
+------------------------------------------------------------------- */
+.bottom{position:absolute;z-index:2;left:0;right:0;bottom:0}
+.meta{position:relative;height:calc(24.94 * var(--u));
+  font-size:calc(12 * var(--u));line-height:1;letter-spacing:-0.02em;white-space:nowrap}
+.meta > *{position:absolute;top:calc(13.330000000000002 * var(--u))}
+.meta .mail{left:calc(24.3 * var(--u));color:var(--ink);letter-spacing:-0.016em}
+.meta .copy{left:calc(258.56 * var(--u));color:var(--ink-dim);letter-spacing:-0.012em}
+.meta .rights{left:calc(339.04 * var(--u));color:var(--ink-mute);letter-spacing:-0.03em}
+.meta .made{right:calc(23 * var(--u));top:calc(9.58 * var(--u));color:var(--ink);letter-spacing:-0.0476em;
+  padding-bottom:calc(0.2 * var(--u));
+  background:linear-gradient(rgba(236,230,244,.23),rgba(236,230,244,.23)) left bottom / 100% calc(1 * var(--u)) no-repeat}
+.meta a:hover{color:#fff}
+
+.wordmark{
+  display:block;width:fit-content;margin:0 auto;text-align:left;white-space:nowrap;
+  font-family:"UPI","Inter Display","Inter",system-ui,sans-serif;font-weight:619;font-optical-sizing:auto;
+  font-size:calc(150.66 * var(--t));line-height:calc(150.66 * var(--t));
+  letter-spacing:-0.0768em;
+  transform:translateX(calc(-2.2 * var(--t)));
+  margin-bottom:calc(4.66 * var(--t));
+  background:linear-gradient(90deg,var(--title-edge) 0%,var(--title-q) 25%,var(--title-mid) 50%,var(--title-q) 75%,var(--title-edge) 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;
+}
+.wordmark span{display:inline}
+
+/* ------------------------------------------------------------------
+   Portrait / small screens — re-flowed, still edge-to-edge
+------------------------------------------------------------------- */
+@media (max-aspect-ratio: 1/1), (max-width: 640px){
+  .hero{--u:clamp(.82px,calc(100vw / 400),1.32px)}
+  .cards{left:calc(16 * var(--u));top:calc(20 * var(--u))}
+  .nav{right:calc(16 * var(--u));top:calc(22 * var(--u))}
+  .join{right:calc(16 * var(--u));top:calc(124 * var(--u))}
+  .meta{height:auto;display:grid;grid-template-columns:1fr auto;align-items:end;
+        row-gap:calc(10 * var(--u));column-gap:calc(16 * var(--u));
+        padding:0 calc(16 * var(--u)) calc(14 * var(--u))}
+  .meta > *{position:static;justify-self:start}
+  .meta .copy{justify-self:end}
+  .meta .made{justify-self:end}
+  .wordmark{
+    --fit:calc((100vw - 32 * var(--u)) / 4.45);
+    font-size:var(--fit);line-height:calc(var(--fit) * .84);
+    transform:translateX(calc(var(--fit) * -0.02));
+    margin-bottom:calc(var(--fit) * .06);
+    background-image:linear-gradient(90deg,var(--title-edge) 0%,var(--title-q) 25%,var(--title-mid) 50%,var(--title-q) 75%,var(--title-edge) 100%);
+  }
+  .bottom::before{content:"";position:absolute;z-index:-1;left:0;right:0;bottom:0;height:calc(100% + 90 * var(--u));
+    background:linear-gradient(to bottom,rgba(0,0,0,0),rgba(0,0,0,.66) 34%,rgba(0,0,0,.86));pointer-events:none}
+  .meta .copy{color:#8a8498}
+  .meta .rights{color:#7d6ca6}
+  .wordmark span{display:block}
+  .wordmark .sp{display:none}
+}
+/* Very short landscape (phones on their side) */
+@media (min-aspect-ratio: 1/1) and (max-height: 430px){
+  .cards{flex-direction:row;width:calc(147.1 * 2 * var(--u))}
+  .card:nth-child(1),.card:nth-child(2){height:calc(89.4 * var(--u));margin-top:calc(5.0 * var(--u))}
+}
+@media (prefers-reduced-motion: reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<main class="hero">
+  <div class="scene" aria-hidden="true">
+    <img src="assets/hero-background.webp" alt="" width="1713" height="918" decoding="async" fetchpriority="high">
+    <svg viewBox="0 0 1178 632" preserveAspectRatio="none">
+      <defs>
+        <filter id="mblur" x="-20%" y="-20%" width="140%" height="140%" color-interpolation-filters="sRGB">
+          <feGaussianBlur stdDeviation="0.25 2.813"/>
+        </filter>
+      </defs>
+      <g fill="var(--logo)" filter="url(#mblur)">
+        <polygon points="552.18,269.73 593.19,271.44 614.75,271.48 614.01,282.90 613.92,301.14 622.84,302.46 583.91,302.47 568.81,287.53"/>
+        <polygon points="612.16,300.75 625.01,299.10 643.86,298.12 645.48,365.47 645.43,362.59 628.33,346.11 612.57,330.76 613.10,334.91"/>
+        <polygon points="551.85,303.95 563.12,305.13 578.87,305.83 579.12,324.60 578.30,334.80 601.80,334.26 607.97,335.39 608.62,358.56 609.39,364.98 593.35,365.30 569.79,365.90 562.17,355.70 550.80,345.90 551.24,324.43"/>
+      </g>
+    </svg>
+  </div>
+
+  <header>
+    <div class="cards">
+      <a class="card" href="#" aria-label="Manager Telegram">
+        <span class="ic"><svg viewBox="0 0 15 15" aria-hidden="true"><polygon points="1.63,8.77 10.74,4.72 9.54,11.65 8.35,11.43 6.45,8.53" fill="#63527a"/><path d="M4.3 9.1 8.2 8.7" stroke="#fff" stroke-width=".75" stroke-opacity=".75" stroke-linecap="round"/></svg></span>
+        <span class="lbl"><span>MANAGER</span><span>TELEGRAM</span></span>
+      </a>
+      <a class="card" href="#" aria-label="Team lead Telegram">
+        <span class="ic"><svg viewBox="0 0 15 15" aria-hidden="true"><polygon points="1.63,8.77 10.74,4.72 9.54,11.65 8.35,11.43 6.45,8.53" fill="#0e0d1b"/><path d="M4.3 9.1 8.2 8.7" stroke="#fff" stroke-width=".75" stroke-opacity=".75" stroke-linecap="round"/></svg></span>
+        <span class="lbl"><span>TEAM LEAD</span><span>TELEGRAM</span></span>
+      </a>
+    </div>
+
+    <nav aria-label="Primary">
+      <ul class="nav">
+        <li><a href="#about">ABOUT US</a></li>
+        <li><a href="#affiliate">AFFILIATE PROGRAM</a></li>
+        <li><a href="#partners">WE WORK WITH</a></li>
+        <li><a href="#team">OUR TEAM</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+    </nav>
+
+    <a class="join" href="#join"><span class="sq" aria-hidden="true"><svg viewBox="0 0 26.31 26.31"><path d="M13.95 8.3V18.8M8.7 13.55H19.2" stroke="#d6d6d8" stroke-width="1.15" fill="none"/></svg></span><span class="tx">JOIN US</span></a>
+  </header>
+
+  <footer class="bottom">
+    <div class="meta">
+      <a class="mail" href="mailto:support@up&amp;upartners.com">SUPPORT@UP&amp;UPARTNERS.COM</a>
+      <span class="copy">©2025</span>
+      <span class="rights">ALL RIGHTS RESERVED</span>
+      <a class="made" href="#">WEBSITE MADE BY NADNOVA</a>
+    </div>
+    <h1 class="wordmark"><span>UP&amp;UP</span><span class="sp"> </span><span>PARTNERS</span></h1>
+  </footer>
+</main>
+</body>
+</html>
